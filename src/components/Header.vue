@@ -1,5 +1,5 @@
 <script setup>
-import logo from '~/assets/images/logo.jpg'
+import logo from '~/assets/images/logo.jpg';
 const links = [
   {
     name: 'Home',
@@ -30,7 +30,7 @@ const handleClick = (index) => {
 </script>
 
 <template>
-  <header class="m-auto flex w-auto xl:container items-center justify-between px-4 xl:justify-start">
+  <header class="m-auto flex container items-center justify-between px-4 xl:justify-start <sm:w-screen">
     <div>
       <img :src="logo" class="w-32 <sm:w-20">
     </div>

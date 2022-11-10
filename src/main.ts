@@ -8,7 +8,6 @@ import './styles/main.css'
 import type { UserModule } from './types'
 
 const routes = setupLayouts(generatedRoutes)
-
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,

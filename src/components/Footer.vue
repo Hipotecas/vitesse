@@ -27,7 +27,7 @@ const pages = [{
 <template>
   <footer class="h-25 bg-hex-FAFAFA mt-20 text-center flex flex-col justify-center <sm:mt-10">
     <nav class="flex items-center  justify-center pt-4 ">
-      <div v-for="item in pages" :key="item.name" class="h-8 leading-8 text-sm text-gray-500 ml-4 page">
+      <div v-for="item in pages" :key="item.name" class="h-8 leading-8 text-sm text-gray-500 not-first:ml-4">
         <router-link :to="item.path">
           {{ item.name }}
         </router-link>

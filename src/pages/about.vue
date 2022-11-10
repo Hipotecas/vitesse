@@ -1,5 +1,7 @@
 <script setup>
-import { Swipe, SwipeItem } from 'vant'
+import * as vant from 'vant';
+
+const { Swipe, SwipeItem } = vant
 const cover = [{
   title: 'Passion to<br />Win',
   desc: 'Be positive, focused and ambitious .Never give up,provide excellent execution and deliver results.',
