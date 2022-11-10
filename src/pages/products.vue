@@ -56,12 +56,6 @@
 </template>
 
 <style lang="less" scoped>
-.banner-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 .product-contact {
     background: url('../assets/images/product_contact.jpg') no-repeat;
     background-size: cover;

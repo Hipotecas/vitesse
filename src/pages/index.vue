@@ -5,7 +5,7 @@
 <template>
   <div class="w-full">
     <div class="w-full relative bg-hex-000b40">
-      <img src="../assets/images/banner_index.jpg">
+      <img src="../assets/images/banner_index.jpg" alt="banner">
       <div
         class="bg-text text-xl lg:text-6xl leading-96px! text-white font-semibold"
       >

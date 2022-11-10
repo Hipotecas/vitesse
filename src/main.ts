@@ -1,12 +1,11 @@
 import { setupLayouts } from 'virtual:generated-layouts'
 import Previewer from 'virtual:vue-component-preview'
+import 'virtual:windi.css'
 import { ViteSSG } from 'vite-ssg'
 import generatedRoutes from '~pages'
 import App from './App.vue'
-import type { UserModule } from './types'
-
-import 'virtual:windi.css'
 import './styles/main.css'
+import type { UserModule } from './types'
 
 const routes = setupLayouts(generatedRoutes)
 

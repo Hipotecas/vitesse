@@ -1,3 +1,7 @@
 {
-  "extends": "@antfu"
+  "extends": "@antfu",
+  "rules": {
+    "import/order": 0,
+    "sort-imports": 0
+  }
 }

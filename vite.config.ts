@@ -9,12 +9,12 @@ import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import Pages from 'vite-plugin-pages'
 import { VitePWA } from 'vite-plugin-pwa'
+import { createStyleImportPlugin, VantResolve } from 'vite-plugin-style-import'
 import Preview from 'vite-plugin-vue-component-preview'
 import Layouts from 'vite-plugin-vue-layouts'
 import Markdown from 'vite-plugin-vue-markdown'
 import WindiCSS from 'vite-plugin-windicss'
 import generateSitemap from 'vite-ssg-sitemap'
-
 export default defineConfig({
   resolve: {
     alias: {
@@ -30,7 +30,9 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
     }),
-
+    createStyleImportPlugin({
+      resolves: [VantResolve()],
+    }),
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ['vue', 'md'],

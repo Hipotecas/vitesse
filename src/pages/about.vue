@@ -1,4 +1,5 @@
 <script setup>
+import { Swipe, SwipeItem } from 'vant';
 const cover = [{
   title: 'Passion to<br />Win',
   desc: 'Be positive, focused and ambitious .Never give up,provide excellent execution and deliver results.',
@@ -36,14 +37,32 @@ const cover = [{
     'Maintain the highest integrity. It’s the “how” we do things that makes us different.',
   ],
 }]
+const photos = [{
+  class: '',
+  name: 'Randall Wollschlager',
+  title: 'President & CEO',
+  desc: 'Strong leadership and experience in Automotive Business in the semiconductor industry.Prior to joining Zenith, he spent 23 years at Maxim Integrated where he was the Senior VP of the Automotive Business Unit (ABU) and 14 years at Motorola Semiconductor...',
+}, {
+  class: 'about-photo-c',
+  name: 'Zenith Fu',
+  title: 'Vice President, Engineering',
+  desc: 'Strong leadership and rich experience in resourch and development in the semiconductor industry. Prior to joining Zenith, he spent 16 years at Qualcom, AMD and Freescales...',
+}, {
+  class: 'about-photo-r',
+  name: 'Yong Diao',
+  title: 'Vice President, Sales&Marketing',
+  desc: 'Strong leadership and rich experience in the semiconductor industry. Perior to join Zenith, he spent 20 years in Texas Instruments...',
+}]
+const getImage = (index) => {
+  return new URL(`../assets/images/about_photo_${index}.png`, import.meta.url).href
+}
+const isMobile = useMediaQuery('(max-width:640px)')
 </script>
 
 <template>
   <div class="relative">
     <img src="../assets/images/banner_about_our.jpg" class="w-full <sm:h-35">
-    <span
-      class="center text-6xl text-white z-10 banner-text <sm:(text-lg w-8/10 text-center)"
-    >
+    <span class="center text-6xl text-white z-10 banner-text <sm:(text-lg w-8/10 text-center)">
       About us
     </span>
   </div>
@@ -69,24 +88,98 @@ const cover = [{
       </p>
     </div>
   </div>
-  <div class="text-3xl <sm:text-xl mx-auto text-center font-extrabold">
-    Our Core Values
+  <div v-if="!isMobile" class="text-3xl <sm:text-xl mx-auto text-center font-extrabold">
+    Meet Our Core Values
   </div>
-  <div class="z-flex mt-40 about-our">
-    <div v-for="(item, index) in cover" :key="index">
-      <p class="font-b-l font-26 txt-c" v-html="item.title" />
-      <p class="mt-40 font-b-s txt-c mh-100">
-        {{ item.desc }}
-      </p>
-      <p
-        v-for="(sitem, sindex) in item.item"
-        :key="sindex"
-        class="z-flex font-b-s mt-20"
+  <div v-else class="core h-30 rounded-md flex items-center text-center text-black justify-center">
+    <p class="text-2xl bg-white p-4 rounded-md">
+      Meet Our Core Values
+    </p>
+  </div>
+  <div class="container <sm:screen">
+    <div class="flex mt-10 about-our <sm:(flex-col px-4)">
+      <div
+        v-for="(item, index) in cover" :key="index"
+        class="not-last:mr-4 rounded-lg flex-1 px-4 py-6 bg-hex-0047ab1a <sm:(mx-0 my-4 w-[calc(100vw-2rem)])"
       >
-        <span class="mr-10">•</span>
-        <span class="font-gray-s">{{ sitem }}</span>
+        <p class="font-bold text-3xl text-center" v-html="item.title" />
+        <p class="mt-10 text-base text-center h-min-25">
+          {{ item.desc }}
+        </p>
+        <p v-for="(sitem, sindex) in item.item" :key="sindex" class="flex text-base mt-5">
+          <span class="mr-3">•</span>
+          <span class="text-lg text-hex-4d4d4d">{{ sitem }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container <sm:w-screen">
+    <div class="about-team">
+      <p class="text-6xl leading-9 min-h-25 pl-24">
+        Meet Our Core Team
       </p>
+      <div v-if="!isMobile" class="flex ">
+        <div v-for="(item, index) in photos" :key="index" class="flex-1 bg not-last:mr-4 text-white p-7 ">
+          <div class="about-photo" :class="item.class">
+            <img :src="getImage(index)" alt="">
+          </div>
+          <div class="font-bold text-3xl">
+            {{ item.name }}
+          </div>
+          <div class="text-xl mt-10">
+            {{ item.title }}
+          </div>
+          <div class="text-base mt-10 h-m-45">
+            {{ item.desc }}
+          </div>
+          <div class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full" @click="linkTo(index)">
+            More
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <Swipe show-indicators="false">
+          <SwipeItem v-for="(item, index) in photos" :key="index" class="flex-1 bg  text-white p-7">
+            <div class="about-photo" :class="item.class">
+              <img :src="getImage(index)" alt="">
+            </div>
+            <div class="font-bold text-3xl">
+              {{ item.name }}
+            </div>
+            <div class="text-xl mt-10">
+              {{ item.title }}
+            </div>
+            <div class="text-base mt-10 h-m-45">
+              {{ item.desc }}
+            </div>
+            <div
+              class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full"
+              @click="linkTo(index)"
+            >
+              More
+            </div>
+          </SwipeItem>
+        </Swipe>
+      </div>
     </div>
   </div>
 </template>
 
+<style>
+.about-team {
+  background: url('../assets/images/about_bg.jpg') right top no-repeat;
+  background-size: auto 261px;
+  padding-top: 140px;
+  margin-top: 50px;
+}
+
+.bg {
+  background: linear-gradient(0.25deg, #C6DAF5 -56.77%, #0047AB 99.78%);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 8px;
+
+}
+.core {
+  background: linear-gradient(0.25deg, #C6DAF5 -56.77%, #0047AB 99.78%);
+}
+</style>
