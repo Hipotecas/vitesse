@@ -6,28 +6,41 @@ const toggleLocales = () => {
   const locales = availableLocales
   locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
 }
+const pages = [{
+  name: 'Products',
+  path: '/products',
+},
+{
+  name: 'About us',
+  path: '/about',
+},
+{
+  name: 'Careers',
+  path: '/careers',
+},
+{
+  name: 'Contact us',
+  path: '/contact',
+}]
 </script>
 
 <template>
-  <nav text-xl mt-6>
-    <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <div i-carbon-campsite />
-    </RouterLink>
-
-    <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
-      <div i="carbon-sun dark:carbon-moon" />
-    </button>
-
-    <a class="icon-btn mx-2" :title="t('button.toggle_langs')" @click="toggleLocales()">
-      <div i-carbon-language />
-    </a>
-
-    <RouterLink class="icon-btn mx-2" to="/about" :title="t('button.about')">
-      <div i-carbon-dicom-overlay />
-    </RouterLink>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank" title="GitHub">
-      <div i-carbon-logo-github />
-    </a>
-  </nav>
+  <footer class="h-25 bg-hex-FAFAFA mt-20 text-center flex flex-col justify-center <sm:mt-10">
+    <nav class="flex items-center  justify-center pt-4 ">
+      <div v-for="item in pages" :key="item.name" class="h-8 leading-8 text-sm text-gray-500 ml-4 page">
+        <router-link :to="item.path">
+          {{ item.name }}
+        </router-link>
+      </div>
+    </nav>
+    <div class="text-sm text-gray-500">
+      Copyright © 2022 Zenith. All Rights Reserved.
+    </div>
+  </footer>
 </template>
+
+<style scoped>
+.page:nth-child(1) {
+  margin-left: 0;
+}
+</style>
