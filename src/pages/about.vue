@@ -1,5 +1,5 @@
 <script setup>
-import { Swipe, SwipeItem } from 'vant';
+import { Swipe, SwipeItem } from 'vant'
 const cover = [{
   title: 'Passion to<br />Win',
   desc: 'Be positive, focused and ambitious .Never give up,provide excellent execution and deliver results.',
@@ -57,15 +57,14 @@ const getImage = (index) => {
   return new URL(`../assets/images/about_photo_${index}.png`, import.meta.url).href
 }
 const isMobile = useMediaQuery('(max-width:640px)')
+const router = useRouter()
+const jump = (index) => {
+  router.push(`/team/${index}`)
+}
 </script>
 
 <template>
-  <div class="relative">
-    <img src="../assets/images/banner_about_our.jpg" class="w-full <sm:h-35">
-    <span class="center text-6xl text-white z-10 banner-text <sm:(text-lg w-8/10 text-center)">
-      About us
-    </span>
-  </div>
+  <AboutBanner />
   <div class="container flex py-20 <sm:(w-screen p-4)">
     <div class="flex flex-col w-1/2 mr-4">
       <p class="text-3xl font-extrabold <sm:text-xl">
@@ -88,14 +87,10 @@ const isMobile = useMediaQuery('(max-width:640px)')
       </p>
     </div>
   </div>
-  <div v-if="!isMobile" class="text-3xl <sm:text-xl mx-auto text-center font-extrabold">
-    Meet Our Core Values
+  <div class="text-3xl <sm:text-xl mx-auto text-center font-extrabold">
+    Our Core Values
   </div>
-  <div v-else class="core h-30 rounded-md flex items-center text-center text-black justify-center">
-    <p class="text-2xl bg-white p-4 rounded-md">
-      Meet Our Core Values
-    </p>
-  </div>
+
   <div class="container <sm:screen">
     <div class="flex mt-10 about-our <sm:(flex-col px-4)">
       <div
@@ -114,12 +109,38 @@ const isMobile = useMediaQuery('(max-width:640px)')
     </div>
   </div>
   <div class="container <sm:w-screen">
-    <div class="about-team">
+    <div v-if="!isMobile" class="about-team">
       <p class="text-6xl leading-9 min-h-25 pl-24">
         Meet Our Core Team
       </p>
-      <div v-if="!isMobile" class="flex ">
-        <div v-for="(item, index) in photos" :key="index" class="flex-1 bg not-last:mr-4 text-white p-7 ">
+    </div>
+    <div v-else class="core h-30 mb-4 rounded-md flex items-center text-center text-black justify-center">
+      <p class="text-2xl bg-white p-4 rounded-md">
+        Meet Our Core Values
+      </p>
+    </div>
+    <div v-if="!isMobile" class="flex ">
+      <div v-for="(item, index) in photos" :key="index" class="flex-1 bg not-last:mr-4 text-white p-7 ">
+        <div class="about-photo" :class="item.class">
+          <img :src="getImage(index)" alt="">
+        </div>
+        <div class="font-bold text-3xl">
+          {{ item.name }}
+        </div>
+        <div class="text-xl mt-10">
+          {{ item.title }}
+        </div>
+        <div class="text-base mt-10 h-m-45">
+          {{ item.desc }}
+        </div>
+        <div class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full" @click="jump(index)">
+          More
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <Swipe show-indicators="false">
+        <SwipeItem v-for="(item, index) in photos" :key="index" class="flex-1 bg  text-white p-7">
           <div class="about-photo" :class="item.class">
             <img :src="getImage(index)" alt="">
           </div>
@@ -132,35 +153,14 @@ const isMobile = useMediaQuery('(max-width:640px)')
           <div class="text-base mt-10 h-m-45">
             {{ item.desc }}
           </div>
-          <div class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full" @click="linkTo(index)">
+          <div
+            class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full"
+            @click="jump(index)"
+          >
             More
           </div>
-        </div>
-      </div>
-      <div v-else>
-        <Swipe show-indicators="false">
-          <SwipeItem v-for="(item, index) in photos" :key="index" class="flex-1 bg  text-white p-7">
-            <div class="about-photo" :class="item.class">
-              <img :src="getImage(index)" alt="">
-            </div>
-            <div class="font-bold text-3xl">
-              {{ item.name }}
-            </div>
-            <div class="text-xl mt-10">
-              {{ item.title }}
-            </div>
-            <div class="text-base mt-10 h-m-45">
-              {{ item.desc }}
-            </div>
-            <div
-              class="inline-block bg-white text-black text-sm font-bold py-2 px-5 rounded-full"
-              @click="linkTo(index)"
-            >
-              More
-            </div>
-          </SwipeItem>
-        </Swipe>
-      </div>
+        </SwipeItem>
+      </Swipe>
     </div>
   </div>
 </template>
